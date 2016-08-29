@@ -26,9 +26,6 @@ var nests = [
 	}
 ];
 
-// var store = JSON.parse(localStorage.getItem(STORAGE_KEY)) || 
-// var store = {nav:[],tree:nestObj};
-
 const state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
 	scope: nests[0].id,
 	nests: nests
@@ -98,7 +95,8 @@ const mutations = {
 		state.nests.push(newParentNest);
 	},
 	SCOPE_TO (state, nestId) {
-		state.currentId = nestId;
+		console.log('hi?');
+		state.scope = nestId;
 	}
 }
 
