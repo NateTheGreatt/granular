@@ -7,9 +7,9 @@
          <add :id='nest.id'></add>
          <remove v-if='nest.parent != null' :id='nest.id'></remove>
       </div>
-      id: {{ nest.id }} <br />
-      name: {{ nest.name }} <br />
-      text: {{ nest.text }} <br />
+      
+      name: <input @change='updateName(nest.id,nest.name)' v-model='nest.name' type='text' /> <br />
+      text: <input @change='updateText(nest.id,nest.text)' v-model='nest.text' type='text' /> <br />
 
       <ul id='{{nest.id}}' v-sortable='sortableOptions'>
          <li v-for='childId in nest.children' id='{{childId}}'><nest :id='childId'></nest></li>
@@ -55,6 +55,12 @@
          actions: {
             move: ({dispatch},nestId,newParentId) => {
                dispatch('MOVE',nestId,newParentId)
+            },
+            updateName: ({dispatch},nestId,name) => {
+               dispatch('EDIT_NAME',nestId,name)
+            },
+            updateText: ({dispatch},nestId,text) => {
+               dispatch('EDIT_TEXT',nestId,text)
             }
          }
       },
@@ -80,6 +86,11 @@ h1 {
    padding: 5px;
    margin: 10px;
    height: 100%;
+   font-family: 'Consolas';
+   font-size: 10px;
+}
+
+input {
    font-family: 'Consolas';
    font-size: 10px;
 }
