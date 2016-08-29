@@ -4,7 +4,8 @@ import plugins from './plugins'
 
 Vue.use(Vuex);
 
-export const STORAGE_KEY = 'nest-app';
+export const APP_STORAGE_KEY = 'nest-app';
+export const HISTORY_STORAGE_KEY = APP_STORAGE_KEY+'-history';
 
 function rndId() {
 	var chars = "abcdefghijklmnopqrstuvwxyz";
@@ -26,10 +27,24 @@ var nests = [
 	}
 ];
 
-const state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
-	scope: nests[0].id,
-	nests: nests
+
+var history = JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY));
+
+if(!history) {
+	history = [{
+		scope: nests[0].id,
+		nests: nests
+	}];
+	localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history));
 }
+
+const state = history[history.length-1];
+
+// initialize history if it doesn't exist
+// if(!history) localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify([]));
+
+// initialize history with current state
+// localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify([state]));
 
 const mutations = {
 	ADD (state, parentId) {
@@ -93,7 +108,6 @@ const mutations = {
 		state.nests.push(newParentNest);
 	},
 	SCOPE_TO (state, nestId) {
-		console.log('hi?');
 		state.scope = nestId;
 	}
 }

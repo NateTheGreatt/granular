@@ -7,7 +7,7 @@
          <add :id='nest.id'></add>
          <remove v-if='nest.parent != null' :id='nest.id'></remove>
       </div>
-      
+      <div style='position:absolute;margin: -16px 0 0 0;'>{{nest.id}}</div>
       name: <input @change='updateName(nest.id,nest.name)' v-model='nest.name' type='text' /> <br />
       text: <input @change='updateText(nest.id,nest.text)' v-model='nest.text' type='text' /> <br />
 
@@ -101,12 +101,6 @@ input {
 }
 
 .button-group button {
-   border-radius: 10px;
-   border-width: 1px;
-   font-family: 'Consolas';
-   font-size: 10px;
-   padding: 0 2px;
-   outline-width: 0;
 }
 
 ul {

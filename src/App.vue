@@ -1,4 +1,6 @@
 <template>
+  <button @click='undo'>Undo</button>
+  <button @click='redo'>Redo</button>
 	<div id="app">
     <nest :id='scope'></nest>
   </div>
@@ -7,6 +9,7 @@
 <script>
 import Nest from './components/Nest.vue';
 import store from './vuex/store';
+import { HISTORY_STORAGE_KEY } from './vuex/store';
 
 export default {
   components: {
@@ -16,6 +19,27 @@ export default {
     getters: {
       scope: state => state.scope,
       nests: state => state.nests
+    }
+  },
+  methods: {
+    undo () {
+      var history = JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY)) || [];
+      console.log(history);
+      if(history.length >= 1) {
+        console.log('undoing')
+        // pop current state off (add to redo stack?)
+        history.pop();
+        // get last state
+        var lastState = history[history.length-1];
+        if(lastState) {
+          console.log(lastState);
+          store.replaceState(lastState);
+          localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(history));
+        }
+      }
+    },
+    redo () {
+
     }
   },
   store
@@ -32,26 +56,25 @@ export default {
 
 html {
   height: 100%;
+  font-family: 'Consolas';
+  font-size: 10px;
+}
+
+button {
+   /*border-radius: 10px;*/
+   border-width: 1px;
+   font-family: 'Consolas';
+   font-size: 10px;
+   padding: 0 2px;
+   outline-width: 0;
 }
 
 body {
 
-/*
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;*/
 }
 
 #app {
-  /*height: 700px;*/
 
-/*
-  color: #2c3e50;
-  margin-top: -100px;
-  max-width: 600px;
-  font-family: Source Sans Pro, Helvetica, sans-serif;
-  text-align: center;*/
 }
 
 #app a {
