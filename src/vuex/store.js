@@ -10,9 +10,7 @@ function rndId() {
 	var chars = "abcdefghijklmnopqrstuvwxyz";
 	chars += chars.toUpperCase() + "0123456789";
 	var id = '';
-	for(var i=0;i<9;i++) {
-		id+=chars[Math.round(Math.random()*(chars.length-1))];
-	}
+	for(var i=0;i<9;i++) id+=chars[Math.round(Math.random()*(chars.length-1))];
 	return id;
 }
 
@@ -31,9 +29,9 @@ var nests = [
 // var store = JSON.parse(localStorage.getItem(STORAGE_KEY)) || 
 // var store = {nav:[],tree:nestObj};
 
-const state = {
+const state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
 	scope: nests[0].id,
-	nests: /*JSON.parse(localStorage.getItem(STORAGE_KEY)) || */nests
+	nests: nests
 }
 
 const mutations = {
