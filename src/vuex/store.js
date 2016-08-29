@@ -19,8 +19,8 @@ function rndId() {
 var nests = [
 	{
 		id: rndId(),
-		name: 'nest 0',
-		text: 'i am the root-level nest',
+		name: '',
+		text: '',
 		parent: null,
 		children: [],
 		scoped: true
@@ -50,8 +50,8 @@ const mutations = {
 	ADD (state, parentId) {
 		var newNest = {
 			id: rndId(),
-			name: 'new nest',
-			text: 'desc',
+			name: '',
+			text: '',
 			parent: parentId,
 			children: [],
 			scoped: false
@@ -94,8 +94,8 @@ const mutations = {
 
 		var newParentNest = {
 			id: rndId(),
-			name: 'new nest',
-			text: 'desc',
+			name: '',
+			text: '',
 			parent: nest.parent,
 			children: [nest.id],
 			scoped: nest.scoped

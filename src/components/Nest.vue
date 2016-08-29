@@ -8,8 +8,8 @@
          <remove v-if='nest.parent != null' :id='nest.id'></remove>
       </div>
       <div style='position:absolute;margin: -16px 0 0 0;'>{{nest.id}}</div>
-      name: <input @change='updateName(nest.id,nest.name)' v-model='nest.name' type='text' /> <br />
-      text: <input @change='updateText(nest.id,nest.text)' v-model='nest.text' type='text' /> <br />
+      <input @change='updateName(nest.id,nest.name)' v-model='nest.name' type='text' placeholder='Name' /> <br />
+      <input @change='updateText(nest.id,nest.text)' v-model='nest.text' type='text' placeholder='Text' /> <br />
 
       <ul id='{{nest.id}}' v-sortable='sortableOptions'>
          <li v-for='childId in nest.children' id='{{childId}}'><nest :id='childId'></nest></li>
@@ -93,6 +93,7 @@ h1 {
 input {
    font-family: 'Consolas';
    font-size: 10px;
+   border: 0;
 }
 
 .button-group {
