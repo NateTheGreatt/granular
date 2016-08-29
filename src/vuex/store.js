@@ -86,7 +86,7 @@ const mutations = {
 	EDIT_NAME (state, nestId, name) {
 		state.nests.find(n=>n.id==nestId).name = name;
 	},
-	EDIT_TEXT (state, nest, text) {
+	EDIT_TEXT (state, nestId, text) {
 		state.nests.find(n=>n.id==nestId).text = text;
 	},
 	EMBED (state, nestId) {
