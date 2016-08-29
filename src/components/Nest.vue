@@ -2,7 +2,7 @@
    <div class='nest'>
       <div class='button-group'>
          <scope-to v-if='nest.id != scope' :id='nest.id'></scope-to>
-         <step-out v-if='nest.id == scope' :id='nest.parent'></step-out>
+         <step-out v-if='nest.id == scope && nest.parent' :id='nest.parent'></step-out>
          <embed-nest v-if='!nest.parent' :id='nest.id'></embed-nest><br />
          <add :id='nest.id'></add>
          <remove v-if='nest.parent != null' :id='nest.id'></remove>

@@ -4,7 +4,7 @@ import plugins from './plugins'
 
 Vue.use(Vuex);
 
-export const STORAGE_KEY = 'nestjs';
+export const STORAGE_KEY = 'nest-app';
 
 function rndId() {
 	var chars = "abcdefghijklmnopqrstuvwxyz";
@@ -51,8 +51,8 @@ const mutations = {
 		// remove from parent's children array
 		var nest = state.nests.find(n=>n.id==nestId);
 		var parent = state.nests.find(n=>n.id==nest.parent);
-		parent.children = parent.children.filter(n=>n.id!=nestId);
-
+		parent.children = parent.children.filter(id=>id!=nest.id);
+		
 		state.nests = state.nests.filter(n=> n.id!=nestId);
 	},
 	MOVE (state, nestId, newParentId) {
@@ -89,8 +89,6 @@ const mutations = {
 		nest.parent = newParentNest.id;
 
 		if(nest.scoped) nest.scoped = false;
-
-		console.log(newParentNest);
 
 		state.nests.push(newParentNest);
 	},
