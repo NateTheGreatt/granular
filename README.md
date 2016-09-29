@@ -1,6 +1,6 @@
-# nest
+# granular
 
-> trello, scaled infinitely
+> kan-ban board, scaled infinitely
 
 ## Build Setup
 
